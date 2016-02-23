@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/reset.css" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <title>Wing Tour 2015</title>
+    </head>
+    <body>
+        <header class="bar">
+            <h1><img src="img/logo4.png" /></h1>
+        </header>
+        <div class="page intro">
+            <input type="text" id="username" placeholder="Enter name">
+            <button class="button button-black" id="save-name">Next</button>
+        </div>
+        <div class="page app">
+            <ul class="places-list">
+
+            </ul>
+        </div>
+        <footer>
+            <ul class="button-bar">
+                <li class="button button-black" id="toggle-list-view">View <span class="unrated">Unrated</span><span class="rated">Rated</span></li>
+                <li class="button button-black" id="add-place-view">Add Place</li>
+            </ul>
+        </footer>
+        <div class="modal-bg"></div>            
+        <div class="modal" id="add-place-modal">
+            <div class="close-modal">x</div>
+            <h1 class="modal-header"> Add wing place </h1>
+            <p> <input id="autocomplete" onFocus="app.getGeo()" placeholder="Enter a place name" type="text"></input> </p>
+            <button class="button button-black add-place">Add Place</button>
+            <div class="add-place-component">
+                <h2 class="name"></h2>
+                <div class="address"></div>
+                <a class="phone"></a>
+            </div>
+        </div>
+        <div class="modal" id="place-rated-modal">
+            <div class="close-modal">x</div>
+            <h1 class="modal-header"> Details </h1>
+            <ul class="individual-ratings">
+                <li><span>Average Rating:</span><span class="avg-rating"></span></li>
+            </ul>
+
+            <div class="place-component bar">
+                <h2 class="name"></h2>
+                <div class="address"></div>
+                <a class="phone"></a>
+            </div>
+        </div>
+        <div class="modal" id="place-details-modal">
+            <div class="close-modal">x</div>
+            <h1 class="modal-header"> Details </h1>
+            <label for="rating">Your Rating:</label><input id="rating" placeholder="0-5" type="number" min="0" max="5" maxlength="2"></input>
+            <ul>
+                <li><span>Average Rating:</span><span class="avg-rating"></span></li>
+            </ul>
+            <div class="place-component bar">
+                <h2 class="name"></h2>
+                <div class="address"></div>
+                <a class="phone"></a>
+            </div>
+            <button class="button button-black rate-place" data-uuid="">Add Rating</button>
+            <a href="" class="button button-black get-directions left">Directions</a>
+        </div>
+        <script type="text/x-handlebars-template" id="list-template">
+            <div class="list-header unrated">Unrated Places</div>
+            <div class="list-header rated">Rated Places</div>
+            {{#each entities}}
+            <li class="border-top" data-isRated="{{ isRated }}" data-uuid="{{ uuid }}">
+                <h2 class="name"> {{ name }} </h2>
+                <div class="place-component">
+                    <div class="address"> {{ address }} </div>
+                    <a href="tel:{{ phone }}"> {{ phone }} </a>
+                    <div class="rating"> {{ ratingsAvg }} </div>
+                    <div class="distance"></div>
+                </div>
+            </li>
+            {{/each}}
+        </script>
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/apigee.min.js"></script>
+        <script type="text/javascript" src="js/handlebars.min.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+    </body>
+</html>
